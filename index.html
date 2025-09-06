@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فرم ثبت تمارین دوره بازاریابی داده محور</title>
+    <style>
+        body {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'B Nazanin', Arial, sans-serif;
+            direction: rtl;
+        }
+        h1 {
+            font-family: 'B Titr', Arial, sans-serif;
+            font-size: clamp(1.4rem, 5vw, 1.7rem);
+            margin-bottom: 1.2rem;
+            color: #333;
+            text-align: center;
+        }
+        .form-container {
+            background-color: #f9f9f9;
+            padding: clamp(0.8rem, 4vw, 1.2rem);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: calc(100% - 20px); /* عرض با کسر 10px از هر طرف */
+            max-width: 380px;
+            text-align: right;
+            margin: 0 10px; /* فاصله 10 پیکسل از راست و چپ */
+            box-sizing: border-box;
+        }
+        .form-field {
+            margin-bottom: 0.8rem;
+        }
+        .form-field label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: clamp(0.85rem, 3.5vw, 0.95rem);
+        }
+        .form-field label::after {
+            content: ' *';
+            color: red;
+        }
+        .form-field select,
+        .form-field input[type="url"] {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: clamp(0.85rem, 3.5vw, 0.95rem);
+            font-family: 'B Nazanin', Arial, sans-serif;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .form-field input[type="url"] {
+            text-align: left;
+            direction: ltr;
+        }
+        .form-field select:focus,
+        .form-field input[type="url"]:focus {
+            outline: none;
+            border-color: #7B2CBF;
+        }
+        button {
+            background-color: #7B2CBF;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            font-family: 'B Nazanin', Arial, sans-serif;
+            font-size: clamp(0.85rem, 3.5vw, 0.95rem);
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #5e2195;
+        }
+        .success-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(0.9rem, 4vw, 1.1rem);
+            color: #000000;
+            text-align: center;
+            padding: 1rem;
+            background-color: #e6f4ea;
+            border-radius: 8px;
+            width: calc(100% - 20px); /* عرض با کسر 10px از هر طرف */
+            max-width: 340px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            margin: 0 10px; /* فاصله 10 پیکسل از راست و چپ */
+            box-sizing: border-box;
+        }
+        .logo-container {
+            margin-top: 1.2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            width: calc(100% - 20px); /* هماهنگ با فرم */
+            margin: 0 10px; /* فاصله 10 پیکسل از راست و چپ */
+        }
+        .logo-container img {
+            height: clamp(1.8rem, 8vw, 2.2rem);
+            width: auto;
+            max-width: 100px;
+            object-fit: contain;
+        }
+        @font-face {
+            font-family: 'B Titr';
+            src: url('https://cdn.fontcdn.ir/Font/Persian/Titr/BTitrBold.woff') format('woff');
+        }
+        @font-face {
+            font-family: 'B Nazanin';
+            src: url('https://cdn.fontcdn.ir/Font/Persian/Nazanin/BNazanin.woff') format('woff');
+        }
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 0.8rem;
+                width: calc(100% - 20px); /* حفظ فاصله 10px از هر طرف */
+                margin: 0 10px;
+            }
+            h1 {
+                font-size: clamp(1.1rem, 5vw, 1.4rem);
+            }
+            .form-field label {
+                font-size: clamp(0.8rem, 3vw, 0.9rem);
+            }
+            .form-field select,
+            .form-field input[type="url"] {
+                padding: 0.4rem;
+                font-size: clamp(0.8rem, 3vw, 0.9rem);
+            }
+            button {
+                padding: 0.4rem;
+                font-size: clamp(0.8rem, 3vw, 0.9rem);
+            }
+            .success-message {
+                font-size: clamp(0.8rem, 3.5vw, 1rem);
+                padding: 0.7rem;
+                width: calc(100% - 20px); /* حفظ فاصله 10px از هر طرف */
+                margin: 0 10px;
+            }
+            .logo-container {
+                margin: 0 10px;
+            }
+            .logo-container img {
+                height: clamp(1.4rem, 7vw, 1.8rem);
+            }
+        }
+        @media (max-width: 400px) {
+            .form-container {
+                padding: 0.6rem;
+                width: calc(100% - 20px); /* حفظ فاصله 10px از هر طرف */
+                margin: 0 10px;
+            }
+            h1 {
+                font-size: clamp(1rem, 4.5vw, 1.2rem);
+            }
+            .success-message {
+                font-size: clamp(0.75rem, 3vw, 0.9rem);
+                padding: 0.6rem;
+                width: calc(100% - 20px); /* حفظ فاصله 10px از هر طرف */
+                margin: 0 10px;
+            }
+            .logo-container {
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container" id="form-container">
+        <h1>فرم ثبت تمارین دوره بازاریابی داده محور</h1>
+        <form id="exercise-form">
+            <div class="form-field">
+                <label for="name">نام و نام خانوادگی</label>
+                <select id="name" required>
+                    <option value="" disabled selected>انتخاب کنید</option>
+                    <option value="ریحانه معظمی">ریحانه معظمی</option>
+                    <option value="فاطمه طهماسبی">فاطمه طهماسبی</option>
+                    <option value="امیرحسین گلی">امیرحسین گلی</option>
+                    <option value="فاطمه روان">فاطمه روان</option>
+                    <option value="اردلان مفیدی نژاد">اردلان مفیدی نژاد</option>
+                    <option value="مهتاب سلمان زاده">مهتاب سلمان زاده</option>
+                    <option value="ایمان مرتضی زاده">ایمان مرتضی زاده</option>
+                    <option value="نیلوفر حسینی">نیلوفر حسینی</option>
+                    <option value="نگار نادری">نگار نادری</option>
+                    <option value="روناک آبدار">روناک آبدار</option>
+                    <option value="مائده حسینی">مائده حسینی</option>
+                    <option value="مجتبی رحیمی">مجتبی رحیمی</option>
+                    <option value="مائده امیری">مائده امیری</option>
+                    <option value="حدیث قاسمی">حدیث قاسمی</option>
+                    <option value="حسین پاکزاد">حسین پاکزاد</option>
+                    <option value="مهرداد عیدی پور">مهرداد عیدی پور</option>
+                    <option value="غزاله شاه حسینی">غزاله شاه حسینی</option>
+                    <option value="مسعود باغستانی">مسعود باغستانی</option>
+                    <option value="سید علیرضا جلالی">سید علیرضا جلالی</option>
+                    <option value="میثم رحمتی">میثم رحمتی</option>
+                    <option value="سید حمید آل حسینی">سید حمید آل حسینی</option>
+                    <option value="محمد جاهدی الماس">محمد جاهدی الماس</option>
+                    <option value="محمود ناصری">محمود ناصری</option>
+                    <option value="نوید صالح فکر عربانی">نوید صالح فکر عربانی</option>
+                    <option value="ساناز نوروزی">ساناز نوروزی</option>
+                    <option value="رضا نظری">رضا نظری</option>
+                    <option value="مهشاد رضازاده">مهشاد رضازاده</option>
+                    <option value="متین قلیچ خانی">متین قلیچ خانی</option>
+                    <option value="زینب غفاری فر">زینب غفاری فر</option>
+                    <option value="پوریا کرمانی">پوریا کرمانی</option>
+                    <option value="محمد مهدی محسن لو">محمد مهدی محسن لو</option>
+                    <option value="سعید احسانی">سعید احسانی</option>
+                    <option value="محمدامین دهقان پور">محمدامین دهقان پور</option>
+                    <option value="رومینا رجبی">رومینا رجبی</option>
+                    <option value="عرفان قاسمی">عرفان قاسمی</option>
+                    <option value="وحید فرهنگ">وحید فرهنگ</option>
+                    <option value="لیلا جواهری">لیلا جواهری</option>
+                    <option value="حدیث صالحی">حدیث صالحی</option>
+                    <option value="سپهر محمدی">سپهر محمدی</option>
+                    <option value="مونا هادی">مونا هادی</option>
+                    <option value="افروز ارشدی">افروز ارشدی</option>
+                    <option value="سیما فکری">سیما فکری</option>
+                    <option value="راحیل دوکوهکی">راحیل دوکوهکی</option>
+                    <option value="هانیه فراست">هانیه فراست</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label for="session">جلسه</label>
+                <select id="session" required>
+                    <option value="" disabled selected>انتخاب کنید</option>
+                    <option value="جلسه صفر">جلسه صفر</option>
+                    <option value="جلسه اول">جلسه اول</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label for="exercise">تمرین</label>
+                <select id="exercise" required>
+                    <option value="" disabled selected>ابتدا جلسه را انتخاب کنید</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label for="google-doc">لینک گوگل داک</label>
+                <input type="url" id="google-doc" required placeholder="https://docs.google.com/...">
+            </div>
+            <button type="submit">ثبت</button>
+        </form>
+    </div>
+    <div class="success-message" id="success-message">با موفقیت ثبت شد.</div>
+    <div class="logo-container">
+        <img src="https://tihe.ac.ir/wp-content/uploads/2024/11/photo_2024-08-22_14-04-34-e1732273692670_11zon.webp" alt="موسسه توسعه">
+    </div>
+    <script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+            return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+            if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+                try {
+                    var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                    var firstSheetName = workbook.SheetNames[0];
+                    var worksheet = workbook.Sheets[firstSheetName];
+                    var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                    var filteredData = jsonData.filter(row => row.some(filledCell));
+                    var headerRowIndex = filteredData.findIndex((row, index) =>
+                        row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                    );
+                    if (headerRowIndex === -1 || headerRowIndex > 25) {
+                        headerRowIndex = 0;
+                    }
+                    var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
+                    csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                    return csv;
+                } catch (e) {
+                    console.error('Error loading file data:', e);
+                    return "";
+                }
+            }
+            return gk_fileData[filename] || "";
+        }
+        const exercisesBySession = {
+            'جلسه صفر': ['اصطلاحات کاربردی'],
+            'جلسه اول': ['تحلیل فیلم کروئلا', 'تمرین پوزیشن برند', 'نترسیدن از ابزار']
+        };
+        const sessionSelect = document.getElementById('session');
+        const exerciseSelect = document.getElementById('exercise');
+        const formContainer = document.getElementById('form-container');
+        const successMessage = document.getElementById('success-message');
+        sessionSelect.addEventListener('change', function() {
+            const selectedSession = this.value;
+            exerciseSelect.innerHTML = '<option value="" disabled selected>انتخاب کنید</option>';
+            if (selectedSession && exercisesBySession[selectedSession]) {
+                exercisesBySession[selectedSession].forEach(exercise => {
+                    const option = document.createElement('option');
+                    option.value = exercise;
+                    option.textContent = exercise;
+                    exerciseSelect.appendChild(option);
+                });
+                exerciseSelect.disabled = false;
+            } else {
+                exerciseSelect.disabled = true;
+            }
+        });
+        document.getElementById('exercise-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            try {
+                formContainer.style.display = 'none';
+                successMessage.style.display = 'block';
+                console.log('Success message displayed'); // برای دیباگ
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                    formContainer.style.display = 'block';
+                    document.getElementById('exercise-form').reset();
+                    exerciseSelect.innerHTML = '<option value="" disabled selected>ابتدا جلسه را انتخاب کنید</option>';
+                    exerciseSelect.disabled = true;
+                    console.log('Form reset and displayed'); // برای دیباگ
+                }, 5000);
+            } catch (e) {
+                console.error('Error during form submission:', e);
+            }
+        });
+    </script>
+</body>
+</html>
